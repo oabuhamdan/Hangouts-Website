@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign up</title>
+    <link href="/static/login.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script src="/static/signup.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg ">
+    <a href="/">
+        <img src="/static/hangout-logo-2019.png" height="51" width="175" alt="logo"/>
+    </a>
+</nav>
+<div class="signin-form">
+    <form action="/signup_1" method="post">
+        <h2>Sign up</h2>
+        <h5>sign in info</h5>
+        {% for error in errors %}
+            <h5 id="errors" style="color:red;">* {{ error }}</h5>
+        {% endfor %}
+        <div class="form-group">
+            <input type="text" class="form-control input-lg" name="username" placeholder="Username" required="required"
+                   autocomplete="off" onchange="checkuser(this.value)">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control input-lg" name="email" placeholder="Email" required="required"
+                   autocomplete="off">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control input-lg" name="password" placeholder="Password"
+                   required="required" onchange="checkpass()"/>
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control input-lg" name="confpassword" placeholder="Confrim Password"
+                   required="required" onchange="checkpass()"/>
+        </div>
+        <div class="form-group">
+            <button type="submit" onclick="checksub()" id="signupbtn" class="btn btn-zenon btn-lg btn-block signup-btn">
+                Go to step 2
+            </button>
+        </div>
+        <div class="text-center small">Already have an account? <a href="/signin">Sign in</a></div>
+
+    </form>
+</div>
+<div class="footer navbar-fixed-bottom" style="background-color: #0270BD; color:#ffffff; ">
+    <h4 width="50px">All rights reserved &#169; 2019</h4>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+nav {
+    background-color: #0270BD;
+}
+
+nav a {
+    color: #ffffff;
+}
+
+.btn-nav {
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.fixed-bottom h6 {
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+.fixed-bottom {
+    bottom: -50px;
+    position: relative;
+}
+
