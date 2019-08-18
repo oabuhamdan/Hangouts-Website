@@ -21,3 +21,9 @@ nav a {
     position: relative;
 }
 
+.btn-secondary{
+    color: #ffffff;
+    background-color: #0270BD;
+        border-color: #0270BD;
+}
+

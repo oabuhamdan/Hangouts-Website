@@ -4,7 +4,7 @@
 import sqlite3
 from tempfile import mkdtemp
 
-from flask import Flask, flash
+from flask import Flask, flash, render_template
 from flask_session import Session
 from werkzeug.security import check_password_hash, \
     generate_password_hash
