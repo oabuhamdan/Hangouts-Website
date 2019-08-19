@@ -44,11 +44,10 @@ db = conn.cursor()
 
 
 @app.route('/')
-@login_required
 def index():
-    user_name = session['user_name']
     """Show portfolio of stocks"""
-    return render_template('index.html', name=user_name)
+    isLogged = session.get('user_name') is not None  # if logged in equals true
+    return render_template('index.html', isLogged=isLogged)
 
 
 @app.route('/signin', methods=['GET', 'POST'])
@@ -95,8 +94,8 @@ def signin():
         return render_template('signin.html')
 
 
-@app.route('/signup_1', methods=['GET', 'POST'])
-def signup_1():
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
     """Register user"""
 
     if request.method == 'POST':
@@ -129,14 +128,14 @@ def signup_1():
         id = db.execute('SELECT id from users where username=?', (username,)).fetchone()[0]
         session['user_id'] = id;
         flash('You have successfully registered')
-        return redirect(url_for('signup_2'))
+        return redirect(url_for('signup2'))
     else:
         # User reached route via GET (as by clicking a link or via redirect)
         return render_template('signup.html')
 
 
-@app.route('/signup_2', methods=['GET', 'POST'])
-def signup_2():
+@app.route('/signup2', methods=['GET', 'POST'])
+def signup2():
     """Register user"""
 
     if request.method == 'POST':
@@ -186,3 +185,9 @@ def logout():
     """Return true if username available, else false, in JSON format"""
     session.clear()
     return redirect('/')
+
+
+@app.route('/findpeople')
+def finpeople():
+    """Show portfolio of stocks"""
+    return render_template('find_people.html')
