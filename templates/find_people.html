@@ -2,36 +2,31 @@
 {% block title %}Find people{% endblock %}
 {% block content %}
     <main role="main">
-        <table class="table table-hover" style="margin-top: 20px;">
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td><button>More Info</button></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td><button>More Info</button></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td><button>More Info</button></td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="results">
+            <div class="card" style="max-width: 200px;max-height: 450px">
+                <img class="card-img-top" width="250" height="200" src="https://via.placeholder.com/250"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Ahmad Hosni</h5>
+                    <p class="card-text">Football tennis and basketball</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
     </main>
+    <style>
+        .card {
+            float: left;
+            margin-left: 35px;
+            margin-right: 35px;
+            margin-bottom: 35px;
+        }
+    .results{
+        margin-left: 6%;
+        margin-top: 50px;
+        width: 90%;
+    }
+    </style>
 {% endblock %}
 
 
