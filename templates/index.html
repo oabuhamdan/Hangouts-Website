@@ -70,27 +70,30 @@
                     <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4">
-                    <img alt="Create Hangout" src="/static/create_hangout.png" height="140" width="140"/>
-                    <h2>Create Hangout</h2>
-                    <p>Plan the hangout and till people around that you are ready to go, and you just want them to join
-                        !</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-                </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4">
                     <img alt="Create Hangout" src="/static/feedback.png" height="140" width="140"/>
                     <h2>Feedback</h2>
                     <p>Rate you last hangout, where you went and what you did.</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+                    <p><a class="btn btn-secondary" href="/feedback" role="button">View details »</a></p>
                 </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4">
+                    <img alt="Create Hangout" src="/static/history.png" height="140" width="140"/>
+                    <h2>History</h2>
+                    <p>Remember people you hanged out with them recently</p>
+                    <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+                </div>
             </div><!-- /.row -->
         </div>
     </main>
-
+    <footer id="footer">
+        <nav class="navbar fixed-bottom">
+            <h6>All rights reserved &#169;</h6>
+        </nav>
+    </footer>
     <script>
         $(document).ready(function () {
             if ("{{ isLogged }}" === "False") {
-                $('#profile').remove()
-                $('#navbar-left').remove()
+                $('#profile').remove();
+                $('#navbar-left').remove();
                 $('#navbar-right').append("<button class=\"btn btn-nav my-2 my-sm-0\" onclick=\"location.href='/signin'\" \">Sign in</a>"
                     + "<button class=\"btn btn-nav my-2 my-sm-0\" onclick=\"location.href='/signup'\">Sign up</button>");
             }

@@ -1,17 +1,43 @@
 {% extends "base.html" %}
 {% block title %}Find people{% endblock %}
 {% block content %}
+    {#"SELECT users.username,email,fullname,number,interests#}
     <main role="main">
-        <div class="results">
-            <div class="card" style="max-width: 200px;max-height: 450px">
-                <img class="card-img-top" width="250" height="200" src="https://via.placeholder.com/250"
-                     alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Ahmad Hosni</h5>
-                    <p class="card-text">Football tennis and basketball</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="results container-lg">
+            {% for user in users %}
+                <div class="card" style="max-width: 200px;max-height: 450px">
+                    <img class="card-img-top userphoto" width="250" height="200"
+                         src="/static/profile_photos/{{ user[5] }}"
+                         alt="{{ user[0] }}"/>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ user[2] }}</h5>
+                        <p class="card-text">Interests: {{ user[4] }}</p>
+                        <button type="button" data-target="#{{ user[0] }}-contactInfo" data-toggle="modal"
+                                class="btn btn-zenon btn-primary">Contact info
+                        </button>
+                    </div>
+
+                    <!-- Modal -->
+                    <div id="{{ user[0] }}-contactInfo" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Contact Info</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Username: {{ user[0] }}</p>
+                                    <p>Username: {{ user[1] }}</p>
+                                    <p>Email: {{ user[2] }}</p>
+                                    <p>Phone number: {{ user[3] }}</p>
+                                    <p>Interests: {{ user[4] }} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
     </main>
     <style>
@@ -20,12 +46,16 @@
             margin-left: 35px;
             margin-right: 35px;
             margin-bottom: 35px;
+            width: 90%;
         }
-    .results{
-        margin-left: 6%;
-        margin-top: 50px;
-        width: 90%;
-    }
+
+        .results {
+            margin-top: 50px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 {% endblock %}
 

@@ -18,10 +18,18 @@ nav a {
     margin-top: 10px;
 }
 
-
-.btn-secondary{
-    color: #ffffff;
-    background-color: #0270BD;
-        border-color: #0270BD;
+.fixed-bottom {
+    position: relative;
 }
 
+
+.btn-secondary {
+    color: #ffffff;
+    background-color: #0270BD;
+    border-color: #0270BD;
+}
+
+#footer {
+    position: absolute;
+    width: 100%;
+}

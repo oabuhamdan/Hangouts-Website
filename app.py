@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+import os
 import sqlite3
 from tempfile import mkdtemp
 
@@ -13,7 +13,8 @@ from werkzeug.security import check_password_hash, \
 from helpers import *
 
 app = Flask(__name__)
-
+UPLOAD_FOLDER = '/home/osama-hamdan/PycharmProjects/cs50project/profile_photos'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Ensure templates are auto-reloaded
 
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -103,6 +104,7 @@ def signup():
         password = request.form.get('password')
         confpassword = request.form.get('confpassword')
         email = request.form.get('email')
+        photo = request.files.get('profile_photo')
 
         # Ensure username was submitted
         errors = []
@@ -117,17 +119,24 @@ def signup():
             errors.append("Email is missing")
         if password != confpassword:
             errors.append("Password and its confirmation are not equal !")
-        # if requests.get(request.url+'/checkuser', 'username=' + username) == 'false':
-        #     errors.append("Username is already taken!")
+
         if len(errors) != 0:
             return render_template('signup.html', errors=errors)
 
-        db.execute('INSERT into users(username,email,password) '
-                   'VALUES (?,?,?)'
-                   , (username, email, generate_password_hash(password)))
+        # profile photo
+        if photo:
+            photoFileName = username + '.jpg'
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photoFileName))
+        else:
+            photoFileName = 'default.jpg'
+
+        db.execute('INSERT into users(username,email,password,photoType) '
+                   'VALUES (?,?,?,?)'
+                   , (username, email, generate_password_hash(password), photoFileName))
+
         id = db.execute('SELECT id from users where username=?', (username,)).fetchone()[0]
-        session['user_id'] = id;
-        flash('You have successfully registered')
+        session['user_id'] = id
+
         return redirect(url_for('signup2'))
     else:
         # User reached route via GET (as by clicking a link or via redirect)
@@ -187,7 +196,17 @@ def logout():
     return redirect('/')
 
 
+@login_required
 @app.route('/findpeople')
 def finpeople():
-    """Show portfolio of stocks"""
-    return render_template('find_people.html')
+    users = db.execute(
+        "SELECT users.username,email,fullname,number,interests,photoType from users"
+        " INNER JOIN hangout_info ON hangout_info.id=users.id").fetchall()
+
+    return render_template('find_people.html', users=users)
+
+
+@login_required
+@app.route('/feedback')
+def feedback():
+    return render_template('feedback.html')

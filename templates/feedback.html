@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Find people{% endblock %}
+{% block content %}
+    <main role="main">
+        <div class="signin-form" style="width: 600px;padding: 40px 0">
+            <form>
+                <h2>Review a Hangout</h2>
+                <div class="form-group">
+                    <label for="inputEmail4">Partner's username</label>
+                    <small>(makesure it's written right)</small>
+                    <input type="email" class="form-control" id="inputEmail4" placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Place you went to</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4" style="align-self: center">
+                        <label>Rate your experience</label>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <fieldset class="rating">
+                            <input type="radio" id="star5" name="rating" value="5"/>
+                            <label class="full" for="star5"
+                                   title="Awesome - 5 stars"></label>
+                            <input type="radio" id="star4half" name="rating" value="4.5"/><label class="half"
+                                                                                                 for="star4half"
+                                                                                                 title="Pretty good - 4.5 stars"></label>
+                            <input type="radio" id="star4" name="rating" value="4"/><label class="full" for="star4"
+                                                                                           title="Pretty good - 4 stars"></label>
+                            <input type="radio" id="star3half" name="rating" value="3 and a half"/><label class="half"
+                                                                                                          for="star3half"
+                                                                                                          title="Meh - 3.5 stars"></label>
+                            <input type="radio" id="star3" name="rating" value="3"/><label class="full" for="star3"
+                                                                                           title="Meh - 3 stars"></label>
+                            <input type="radio" id="star2half" name="rating" value="2 and a half"/><label class="half"
+                                                                                                          for="star2half"
+                                                                                                          title="Kinda bad - 2.5 stars"></label>
+                            <input type="radio" id="star2" name="rating" value="2"/><label class="full" for="star2"
+                                                                                           title="Kinda bad - 2 stars"></label>
+                            <input type="radio" id="star1half" name="rating" value="1 and a half"/><label class="half"
+                                                                                                          for="star1half"
+                                                                                                          title="Meh - 1.5 stars"></label>
+                            <input type="radio" id="star1" name="rating" value="1"/><label class="full" for="star1"
+                                                                                           title="Sucks big time - 1 star"></label>
+                            <input type="radio" id="starhalf" name="rating" value="half"/><label class="half"
+                                                                                                 for="starhalf"
+                                                                                                 title="Sucks big time - 0.5 stars"></label>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress2">Talk about your trip</label>
+                    <textarea class="form-control" id="inputAddress2"
+                              placeholder="Good memories remain forever"></textarea>
+                </div>
+                <button type="submit" class="btn-zenon btn-lg signup-btn  btn-block">Submit Feedback</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}
+
+

@@ -1,27 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sign up</title>
-    <link href="/static/login.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-    <script src="/static/signup.js"></script>
-
-</head>
-<body>
-<nav class="navbar navbar-expand-lg">
-    <a href="/">
-        <img src="/static/hangout-logo-2019.png" height="51" width="175" alt="logo"/>
-    </a>
-</nav>
+{% extends "base.html" %}
+{% block title %}Find people{% endblock %}
+{% block nav %}
+    <header>
+        <nav class="navbar navbar-expand-md fixed-top">
+            <a href="/">
+                <img src="/static/hangout-logo-2019.png" height="51" width="175" alt="logo"/>
+            </a>
+            <ul class="nav navbar-nav ml-auto" id="navbar-right">
+                <button class="btn btn-nav my-2 my-sm-0" onclick="location.href='/signin'">Sign in</button>
+                <button class="btn btn-nav my-2 my-sm-0" onclick="location.href='/signup'">Sign up</button>
+            </ul>
+        </nav>
+    </header>
+{% endblock %}
+{% block content %}
 <div class="signin-form">
     <form action="/signup2" method="post">
         <h2>Sign up</h2>
@@ -45,14 +37,11 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" id="signupbtn" class="btn btn-zenon btn-lg btn-block signup-btn">
+            <button type="submit" id="signupbtn" class="btn-zenon btn-lg btn-block signup-btn">
                 Sign up
             </button>
         </div>
     </form>
 </div>
-<div class="footer navbar-fixed-bottom" style="background-color: #0270BD; color:#ffffff; ">
-    <h4 width="50px">All rights reserved &#169; 2019</h4>
-</div>
-</body>
-</html>
+
+{% endblock %}

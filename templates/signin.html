@@ -1,44 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
-    <link href="/static/login.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-<nav class="navbar navbar-expand-lg ">
-    <a href="/">
-        <img src="/static/hangout-logo-2019.png" height="51" width="175" alt="logo"/>
-    </a>
-</nav>
-<div class="signin-form">
-    <form action="/signin" method="post">
-        <h2 style="margin-top:30px;margin-bottom:30px">Sign in</h2>
-        {% for error in errors %}
-            <h6 id="errors" style="color:red;">* {{ error }}</h6>
-        {% endfor %}
-        <div class="form-group">
-            <input type="text" class="form-control input-lg" name="username" placeholder="Username" required="required">
-        </div>
-        <div class="form-group">
-            <input type="password" class="form-control input-lg" name="password" placeholder="Password"
-                   required="required">
-        </div>
-        <div class="form-group">
-            <button id="signinbtn" type="submit" class="btn btn-zenon btn-lg btn-block signup-btn">Sign in</button>
-        </div>
-        <div class="text-center small"><a href="#">Forgot Your password?</a></div>
-        <div class="text-center small">Don't have an account? <a href="/signup">Sign up</a></div>
+{% extends "base.html" %}
+{% block title %}Find people{% endblock %}
+{% block nav %}
+    <header>
+        <nav class="navbar navbar-expand-md fixed-top">
+            <a href="/">
+                <img src="/static/hangout-logo-2019.png" height="51" width="175" alt="logo"/>
+            </a>
+            <ul class="nav navbar-nav ml-auto" id="navbar-right">
+                <button class="btn btn-nav my-2 my-sm-0" onclick="location.href='/signin'">Sign in</button>
+                <button class="btn btn-nav my-2 my-sm-0" onclick="location.href='/signup'">Sign up</button>
+            </ul>
+        </nav>
+    </header>
+{% endblock %}
+{% block content %}
+    <div class="signin-form">
+        <form action="/signin" method="post">
+            <h2 style="margin-top:30px;margin-bottom:30px">Sign in</h2>
+            {% for error in errors %}
+                <h6 id="errors" style="color:red;">* {{ error }}</h6>
+            {% endfor %}
+            <div class="form-group">
+                <input type="text" class="form-control input-lg" name="username" placeholder="Username"
+                       required="required">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control input-lg" name="password" placeholder="Password"
+                       required="required">
+            </div>
+            <div class="form-group">
+                <button id="signinbtn" type="submit" class="btn-zenon btn-lg btn-block signup-btn">Sign in</button>
+            </div>
+            <div class="text-center small"><a href="#">Forgot Your password?</a></div>
+            <div class="text-center small">Don't have an account? <a href="/signup">Sign up</a></div>
 
-    </form>
-</div>
-<div class="footer navbar-fixed-bottom" style="background-color: #0270BD; color:#ffffff; ">
-    <h4 width="50px">All rights reserved &#169; 2019</h4>
-</div>
-</body>
-</html>
+        </form>
+    </div>
+{% endblock %}
