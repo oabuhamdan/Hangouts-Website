@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Find people{% endblock %}
 {% block content %}
-    {#"SELECT users.username,email,fullname,number,interests#}
     <main role="main">
         <div class="results container-lg">
             {% for user in users %}
@@ -32,6 +31,7 @@
                                     <p>Email: {{ user[2] }}</p>
                                     <p>Phone number: {{ user[3] }}</p>
                                     <p>Interests: {{ user[4] }} </p>
+                                    <p>Rating:<img src="/static/stars/{{ user[6] }}stars.png" height="25"/></p>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,6 @@
         .results {
             margin-top: 50px;
             height: 100%;
-            display: flex;
             align-items: center;
             justify-content: center;
         }

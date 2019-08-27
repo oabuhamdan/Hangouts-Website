@@ -196,17 +196,47 @@ def logout():
     return redirect('/')
 
 
-@login_required
 @app.route('/findpeople')
-def finpeople():
+@login_required
+def findpeople():
     users = db.execute(
-        "SELECT users.username,email,fullname,number,interests,photoType from users"
+        "SELECT users.username,email,fullname,number,interests,photoType,hangout_info.rating from users"
         " INNER JOIN hangout_info ON hangout_info.id=users.id").fetchall()
 
     return render_template('find_people.html', users=users)
 
 
+def updateUserRating(user, rating):
+    user = db.execute("SELECT id from users WHERE username=?", (user,)).fetchone()
+    if user:
+        userID = user[0]
+    else:
+        raise Exception('User not found')
+
+    userRating = int(db.execute("Select rating From hangout_info WHERE id=?", (userID,)).fetchone()[0])
+    userRating = int((int(userRating) + int(rating)) / 2)
+    db.execute("UPDATE hangout_info SET rating=? WHERE id=?", (userRating, userID))
+
+
+@app.route('/review', methods=['GET', 'POST'])
 @login_required
-@app.route('/feedback')
 def feedback():
-    return render_template('feedback.html')
+    if request.method == 'POST':
+        loggedUser = session['user_name']
+        reviewedUser = request.form.get('username')
+        places = request.form.get('place')
+        rating = request.form.get('rating')
+        description = request.form.get('desc')
+        try:
+            updateUserRating(reviewedUser, rating)
+        except:
+            return render_template('feedback.html', errormsg="User not found!!")
+
+        db.execute("INSERT INTO reviews(logged_user,reviewed_user,places,rating,desc) values(?,?,?,?,?)", (loggedUser,
+                                                                                                           reviewedUser,
+                                                                                                           places,
+                                                                                                           rating,
+                                                                                                           description))
+        return redirect('/')
+    else:
+        return render_template('feedback.html')
