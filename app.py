@@ -4,7 +4,7 @@ import os
 import sqlite3
 from tempfile import mkdtemp
 
-from flask import Flask, flash, render_template, request, url_for
+from flask import flash, Flask, flash, render_template, request, url_for
 from flask_session import Session
 from werkzeug.security import check_password_hash, \
     generate_password_hash
@@ -13,7 +13,7 @@ from werkzeug.security import check_password_hash, \
 from helpers import *
 
 app = Flask(__name__)
-UPLOAD_FOLDER = '/home/osama-hamdan/PycharmProjects/cs50project/profile_photos'
+UPLOAD_FOLDER = 'static/profile_photos'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Ensure templates are auto-reloaded
 
@@ -88,7 +88,8 @@ def signin():
             return render_template('signin.html', errors=errors)
 
         # Redirect user to home page
-
+        id = db.execute("SELECT id from users WHERE username=?", (username,)).fetchone()[0]
+        session['user_id'] = id
         return redirect('/')
 
     else:
@@ -237,6 +238,58 @@ def feedback():
                                                                                                            places,
                                                                                                            rating,
                                                                                                            description))
+        flash("User reviewed successfully")
         return redirect('/')
     else:
         return render_template('feedback.html')
+
+
+@app.route('/history')
+@login_required
+def history():
+    user = session['user_name']
+    data = db.execute("SELECT * from reviews WHERE logged_user=?", (user,)).fetchall()
+    return render_template('history.html', data=data)
+
+
+@app.route('/settings', methods=['GET', 'POST'])
+@login_required
+def settings():
+    username = session['user_name']
+    info = db.execute(
+        "SELECT fullname,email,photoType,password,interests,number from users"
+        " INNER JOIN hangout_info ON hangout_info.id=users.id WHERE username=?", (username,)).fetchone()
+    fullname = info[0]
+    email = info[1]
+    photoType = info[2]
+    password = info[3]
+    interests = info[4]
+    number = info[5]
+
+    if request.method == 'GET':
+        print(info)
+        return render_template('profile.html', info=info)
+    else:
+        if request.form.get('fullname') != '':
+            fullname = request.form.get('fullname')
+        if request.form.get('email') != '':
+            email = request.form.get('email')
+        if request.form.get('password') != '':
+            password = generate_password_hash(request.form.get('password'))
+        if request.form.get('number') != '':
+            number = request.form.get('number')
+        if request.form.get('interests') != '':
+            interests = request.form.get('interests')
+        if request.files.get('profile_photo'):
+            photo = request.files.get('profile_photo')
+            photoType = username + '.jpg'
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photoType))
+
+        db.execute("UPDATE hangout_info SET fullname=?,interests=?,number=? WHERE id=?"
+                   , (fullname, interests, number, session['user_id']))
+        db.execute("UPDATE users SET email=?,password=?,photoType=? WHERE username=?"
+                   , (email, generate_password_hash(password), photoType, username))
+
+        print(fullname, email, password)
+        flash("Profile updated successfully!!")
+        return redirect('/')

@@ -1,5 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Find people{% endblock %}
+{% block title %}Sign up{% endblock %}
+{% block nav %}
+    <header>
+        <nav class="navbar navbar-expand-md fixed-top">
+            <a href="/">
+                <img src="/static/hangout-logo-2019.png" height="51" width="175" alt="logo"/>
+            </a>
+            <ul class="nav navbar-nav ml-auto" id="navbar-right">
+                <button class="btn btn-nav my-2 my-sm-0" onclick="location.href='/signin'">Sign in</button>
+                <button class="btn btn-nav my-2 my-sm-0" onclick="location.href='/signup'">Sign up</button>
+            </ul>
+        </nav>
+    </header>
+{% endblock %}
 {% block content %}
     <main role="main">
         <div class="signin-form">
@@ -43,6 +56,7 @@
             </form>
         </div>
     </main>
+
 {% endblock %}
 
 

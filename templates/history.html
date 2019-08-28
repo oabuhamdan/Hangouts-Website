@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}History{% endblock %}
+{% block content %}
+    <main role="main">
+        <div class="signin-form" style="text-align:center;width: 80%;padding: 40px 0">
+
+            <h2>Hangout History</h2>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Partner username</th>
+                    <th scope="col">Places you visited</th>
+                    <th scope="col">Rating</th>
+                    <th scope="col">Memories</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for row in data %}
+                    <tr>
+                        <td>
+                            {{ row[1] }}
+                        </td>
+                        <td>
+                            {{ row[2] }}
+                        </td>
+                        <td>
+                            <img alt="rating" src="/static/stars/{{ row[3] }}stars.png" height="25"/>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-primary" data-placement="bottom"
+                                    data-toggle="popover"
+                                    title="More Details"
+                                    data-content="{{ row [4] }}">
+                                More Details
+                            </button>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <style>
+        .table td {
+            padding: 0;
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
+{% endblock %}
+
+

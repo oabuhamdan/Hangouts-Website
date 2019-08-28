@@ -14,7 +14,7 @@ function checkpass() {
     if (pass && confpass) {
         if (pass === confpass) {
             passequal = true;
-            pasel.popover('destroy');
+            pasel.popover('hide');
         } else {
             pasel.popover(
                 {
@@ -35,7 +35,7 @@ function checkuser(username) {
     $.ajax('/checkuser?username=' + username, {
             success: function (data, status, xhr) {   // success callback function
                 if (data === 'true') {
-                    usrel.popover('destroy');
+                    usrel.popover('hide');
                     usernameavlbl = true;
                 } else {
                     usrel.popover(
@@ -61,4 +61,11 @@ function checksub() {
         $("form").on('click', DoPrevent);
 
 }
-    
+
+function checksubprof() {
+    if (passequal)
+        $("form").off('click', DoPrevent);
+    else
+        $("form").on('click', DoPrevent);
+
+}

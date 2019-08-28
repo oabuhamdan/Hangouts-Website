@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Profile Settings{% endblock %}
+{% block content %}
+    <main role="main">
+        <form action="/settings" method="post" enctype="multipart/form-data">
+            <div class="container" style="padding-top: 25px">
+                <h1>Edit Profile</h1>
+                <hr>
+                <div class="row">
+                    <!-- left column -->
+                    <div class="col-md-3">
+                        <div class="text-center">
+                            <img src="/static/profile_photos/{{ info[2] }}" width="200" height="250" alt="avatar">
+                            <h6>Upload a different photo...</h6>
+
+                            <input name="profile_photo" type="file" class="form-control" accept=".jpg,.png,.jpeg">
+                        </div>
+                    </div>
+
+                    <!-- edit form column -->
+                    <div class="col-md-9 personal-info">
+                        <h3>Personal info</h3>
+
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Full name:</label>
+                                <div class="col-lg-8">
+                                    <input name="fullname" class="form-control" type="text" value="{{ info[0] }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Email:</label>
+                                <div class="col-lg-8">
+                                    <input name="email" class="form-control" type="text" value="{{ info[1] }}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Interests</label>
+                                <div class="col-lg-8">
+                                    <input name="interests" class="form-control" type="text" value="{{ info[4] }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Phone Number</label>
+                                <div class="col-lg-8">
+                                    <input name="number" class="form-control" type="text" value="{{ info[5] }}">
+                                </div>
+                            </div>
+                            <div class=" form-group">
+                                <label class="col-md-3 control-label">Password:</label>
+                                <div class="col-md-8">
+                                    <input name="password" class="form-control" type="password" onchange="checkpass()">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Confirm password:</label>
+                                <div class="col-md-8">
+                                    <input name="confpassword" class="form-control" type="password"
+                                           onchange="checkpass()">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-8">
+                                    <input onclick="checksubprof()" type="submit" class="btn btn-primary"
+                                           value="Save Changes">
+                                    <span></span>
+                                    <input onclick="location.href='/'" type="reset" class="btn btn-default"
+                                           value="Cancel">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </form>
+    </main>
+{% endblock %}
