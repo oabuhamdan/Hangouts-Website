@@ -11,22 +11,20 @@ function checkpass() {
     var pasel = $('input[name="confpassword"]');
     var pass = $('input[name="password"]').val();
     var confpass = pasel.val();
-    if (pass && confpass) {
-        if (pass === confpass) {
-            passequal = true;
-            pasel.popover('hide');
-        } else {
-            pasel.popover(
-                {
-                    trigger: 'manual',
-                    title: 'Error',
-                    content: "Password and its confirmation are not equal",
-                    placement: 'right'
-                }
-            );
-            pasel.popover('show');
-            passequal = false;
-        }
+    if (pass === confpass) {
+        passequal = true;
+        pasel.popover('hide');
+    } else {
+        pasel.popover(
+            {
+                trigger: 'manual',
+                title: 'Error',
+                content: "Password and its confirmation are not equal",
+                placement: 'right'
+            }
+        );
+        pasel.popover('show');
+        passequal = false;
     }
 }
 
@@ -63,9 +61,14 @@ function checksub() {
 }
 
 function checksubprof() {
+    var pasel = $('input[name="confpassword"]');
+    var pass = $('input[name="password"]').val();
+    var confpass = pasel.val();
+    if (pass === confpass) {
+        passequal = true;
+    }
     if (passequal)
         $("form").off('click', DoPrevent);
     else
         $("form").on('click', DoPrevent);
-
 }
